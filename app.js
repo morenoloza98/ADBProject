@@ -8,9 +8,10 @@ const app = express();
 
 // Configurations
 const appConfig = require('./configs/app');
+const keys = require('./configs/keys');
 
 // Mongoose
-mongoose.connect("mongodb://localhost:27017/netflix", { 
+mongoose.connect(keys.MONGO_URI, { 
     useUnifiedTopology: true,
     useNewUrlParser: true
 });
