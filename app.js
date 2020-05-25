@@ -1,5 +1,6 @@
 // Imports
 const express = require('express');
+const mongoose = require('mongoose');
 const webRoutes = require('./routes/web');
 
 // Express app creation
@@ -8,6 +9,11 @@ const app = express();
 // Configurations
 const appConfig = require('./configs/app');
 
+// Mongoose
+mongoose.connect("mongodb://localhost:27017/netflix", { 
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+});
 
 // Receive parameters from the Form requests
 app.use(express.urlencoded({ extended: true }));
