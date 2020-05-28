@@ -34,7 +34,7 @@ app.use('/', webRoutes);
 
 // App init
 app.listen(appConfig.expressPort, () => {
-  console.log(`Server is listenning on awesome moreno server!!!!!! -> ${appConfig.expressPort}! (http://localhost:${appConfig.expressPort})`);
+  console.log(`Server is listenning on -> ${appConfig.expressPort}! (http://localhost:${appConfig.expressPort})`);
 });
 
 
