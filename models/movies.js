@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+const {Schema} = mongoose;
 
 let moviesSchema = new Schema({
     id: { type: String },
