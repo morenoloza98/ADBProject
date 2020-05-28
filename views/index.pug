@@ -1,0 +1,7 @@
+html
+    head
+        title="Index del proyecto"
+    body
+        h1='Seleccione la query que desee probar'
+        each val in routes
+            a(href='/'+val, target="_blank", rel="noopener noreferrer") Query #{val}  <br />

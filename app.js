@@ -17,6 +17,10 @@ const port = process.env.PORT || 3000;
 // Configurations
 const appConfig = require('./configs/app');
 
+//Setup Pug 
+app.set('views', './views');
+app.set('view engine', 'pug');
+
 app.use(bodyParser.json());
 
 // Mongoose

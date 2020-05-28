@@ -1,7 +1,10 @@
 let Movie = require('../models/movies');
 
 exports.index = (req, res) => {
-  res.json({ msg: "Hello from our final project" });
+  JSON.stringify( app.routes.routes)
+  res.render('index', {
+    routes:["movieTitles", "test1"]
+  });
 }
 
 exports.movieTitles =  (req, res) => {
