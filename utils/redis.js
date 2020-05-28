@@ -18,7 +18,8 @@ const exec = mongoose.Query.prototype.exec;
 mongoose.Query.prototype.cache = function(options = { time: 60 }) {
   this.useCache = true;
   this.time = options.time;
-  this.hashKey = JSON.stringify(options.key || this.mongooseCollection.movies); //MODIFIQUE
+  this.hashKey = JSON.stringify(options.key || this.mongooseCollection.name);
+  console.log(this.mongooseCollection.name);
   return this;
 };
 
@@ -29,9 +30,9 @@ mongoose.Query.prototype.exec = async function() {
 
   const key = JSON.stringify({
     ...this.getQuery(),
-    collection: this.mongooseCollection.movies //MODIFIQUE
+    collection: this.mongooseCollection.movies
   });
-
+  
   const cacheValue = await client.hget(this.hashKey, key);
 
   if (cacheValue) {
@@ -40,16 +41,15 @@ mongoose.Query.prototype.exec = async function() {
     return Array.isArray(doc)
       ? doc.map(d => new this.model(d))
       : new this.model(doc);
-  }/*else{
-    console.log("Nothinggggg"); //MODIFIQUE
-  }*/
+  } else {
+    const result = await exec.apply(this, arguments);
+    // console.log(this.time);
+    client.hset(this.hashKey, key, JSON.stringify(result));
+    client.expire(this.hashKey, this.time);
+    console.log("Response from MongoDB");
+    return result;
+  }
 
-  const result = await exec.apply(this, arguments);
-  console.log(this.time);
-  client.hset(this.hashKey, key, JSON.stringify(result));
-  client.expire(this.hashKey, this.time);
-  console.log("Response from MongoDB");
-  return result;
 
 };
 module.exports = {

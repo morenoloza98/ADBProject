@@ -1,27 +1,25 @@
 let Movie = require('../models/movies');
 
 exports.index = (req, res) => {
-    res.json({ msg: "Hello from our final project" });
+  res.json({ msg: "Hello from our final project" });
 }
 
-exports.movieTitles = async (req, res) => {
-    await Movie.find({}, 'title', (err, movies) => {
-        if(err) throw err;
-        res.json({ movies : movies })
-        console.log("WUUU");
-    }).cache();
+exports.movieTitles =  (req, res) => {
+  Movie.find({}, 'title', (err, movies) => {
+      if(err) throw err;
+      res.json({ movies : movies })
+      console.log("WUUU");
+  }).cache();
 };
 
 exports.test = (req, res) => {
-    res.json({ msg: "Hello test" })
+  res.json({ msg: "Hello test" })
 }
 
 exports.test1 = async (req, res) => {
-        console.log("Ya entré");
-      const movies = await Movie.find().cache({ expire: 10 });
-      console.log(movies);
-      res.json(movies);
-    };
+  const movies = await Movie.find({}, "title").cache({ time: 10 });
+  res.json(movies);
+};
   
     /*app.post('test', async (req, res) => {
       const { title, director, country } = req.body;
