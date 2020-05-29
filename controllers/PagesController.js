@@ -1,9 +1,8 @@
 let Movie = require('../models/movies');
 
 exports.index = (req, res) => {
-  JSON.stringify( app.routes.routes)
   res.render('index', {
-    routes:["movieTitles", "test1"]
+    val:"movieTitles"
   });
 }
 
