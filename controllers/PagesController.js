@@ -33,75 +33,73 @@ exports.index = (req, res) => {
 }
 
 exports.movieByType = async (req, res) => {
-  const moviesByType = await Movie.find({ 'type': type }, { _id: 0 }).limit(10).cache({ time: 10 });
+  const moviesByType = await Movie.find({ 'type': type }, { _id: 0 }).limit(10).cache({ time: 1440, key: 'type' });
   res.json(moviesByType);
 };
 
 exports.movieByTitle = async (req, res) => {
-  const moviesByTitle = await Movie.find({ 'title': title }, { _id: 0 }).cache({ time: 10 });
+  const moviesByTitle = await Movie.find({ 'title': title }, { _id: 0 }).cache({ time: 1440, key: 'title' });
   res.json(moviesByTitle);
 };
 
 exports.movieByDirector = async (req, res) => {
-  const moviesByDirector = await Movie.find({ 'director': director}).cache({ time: 10 });
+  const moviesByDirector = await Movie.find({ 'director': director}).cache({ time: 1440, key: 'director' });
   res.json(moviesByDirector);
 };
 
 exports.movieByCast = async (req, res) => {
-  const moviesByCast = await Movie.find({ 'cast': { $regex: cast } }).cache({ time: 10 });
+  const moviesByCast = await Movie.find({ 'cast': { $regex: cast } }).cache({ time: 1440, key: 'cast' });
   res.json(moviesByCast);
 };
 
 exports.movieByCountry = async (req, res) => {
-  const movieByCountry = await Movie.find({ 'country': { $regex: country } }).cache({ time: 10 });
+  const movieByCountry = await Movie.find({ 'country': { $regex: country } }).cache({ time: 1440, key: 'country' });
   res.json(movieByCountry);
 };
 
 exports.movieByYear = async (req, res) => {
-  const movieByYear = await Movie.find({ 'release_year': release_year }).cache({ time: 10 });
+  const movieByYear = await Movie.find({ 'release_year': release_year }).cache({ time: 1440, key: 'year' });
   res.json(movieByYear);
 };
 
 exports.movieByRating = async (req, res) => {
-  const movieByRating = await Movie.find({ 'rating': rating }).cache({ time: 10 });
+  const movieByRating = await Movie.find({ 'rating': rating }).cache({ time: 1440, rating: 'rating' });
   res.json(movieByRating);
 };
 
 exports.movieByDuration = async (req, res) => {
-  const movieByDuration = await Movie.find({ 'duration': duration }).cache({ time: 10 });
+  const movieByDuration = await Movie.find({ 'duration': duration }).cache({ time: 1440, key: 'duration' });
   res.json(movieByDuration);
 };
 
 exports.movieByGenre = async (req, res) => {
-  const movieByGenre = await Movie.find({ 'listed_in': listed_in }).cache({ time: 10 });
+  const movieByGenre = await Movie.find({ 'listed_in': listed_in }).cache({ time: 1440, key: 'genre' });
   res.json(movieByGenre);
 };
 
 exports.movieByDesc = async (req, res) => {
-  const movieByDesc = await Movie.find({ 'description': description }).cache({ time: 10 });
+  const movieByDesc = await Movie.find({ 'description': description }).cache({ time: 1440, key: 'moviesByDesc' });
   console.log(typeof(movieByDesc));
   res.json(movieByDesc);
 };
 
 exports.moviesRRated = async (req, res) => {
-  const moviesRRated = await Movie.find({ 'rating': 'R' }).countDocuments().cache({ time: 10 });
-  const obj = {moviesRRated};
-  console.log(typeof(obj));
-  res.json(obj);
+  const moviesRRated = await Movie.find({ 'rating': 'R' }).countDocuments().cache({ time: 1440, key: 'rRated' });
+  res.json(moviesRRated);
 };
 
 exports.tvShows = async (req, res) => {
-  const tvShows = await Movie.find({ 'type': 'TV Show' }).countDocuments().cache({ time: 10 });
+  const tvShows = await Movie.find({ 'type': 'TV Show' }).countDocuments().cache({ time: 1440, key: 'numShows' });
   res.json(tvShows);
 };
 
 exports.moreThanOne = async (req, res) => {
-  const moreThanOne = await Movie.find({ 'director': { $regex: ',' } }).countDocuments().cache({ time: 10 });
+  const moreThanOne = await Movie.find({ 'director': { $regex: ',' } }).countDocuments().cache({ time: 1440, key: 'countMoreDirec' });
   res.json(moreThanOne);
 };
 
 exports.releaseYear = async (req, res) => {
-  const releasedYear = await Movie.find({ 'release_year': '2012'}).countDocuments().cache({ time: 10 });
+  const releasedYear = await Movie.find({ 'release_year': '2012'}).countDocuments().cache({ time: 1440, key: 'numReleaseYear' });
   res.json(releasedYear);
 };
 
