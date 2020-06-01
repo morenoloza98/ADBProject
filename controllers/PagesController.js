@@ -14,7 +14,21 @@ const description = 'A young journalist is forced into a life of crime to save h
 
 exports.index = (req, res) => {
   res.render('index', {
-    val:"movieTitles"
+    type:"type",
+    title:"title",
+    director:"director",
+    cast:"cast",
+    country:"country",
+    release_year:"year",
+    rating:"rating",
+    duration:"duration",
+    listed_in:"genre",
+    description:"description",
+    ratedCount:"R-rated",
+    shows:"shows",
+    moreThanOne:"moreThanOne",
+    releasedYear:"releasedYear",
+    addMovie:"add-movie"
   });
 }
 
