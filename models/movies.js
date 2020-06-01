@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 let moviesSchema = new Schema({
-    id: { type: String },
+    id: { type: Number },
     type: { type: String},
     title: { type: String },
     director: { type: String },
