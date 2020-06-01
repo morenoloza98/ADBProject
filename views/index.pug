@@ -17,4 +17,5 @@ html
         a(href='/'+shows, target="_blank", rel="noopener noreferrer") Query #{shows}  <br />
         a(href='/'+moreThanOne, target="_blank", rel="noopener noreferrer") Query #{moreThanOne}  <br />
         a(href='/'+releasedYear, target="_blank", rel="noopener noreferrer") Query #{releasedYear}  <br />
-        a(href='/'+addMovie, target="_blank", rel="noopener noreferrer", method="POST") Query #{addMovie}  <br />
+        form(action="/add-movie" method="post")
+            input(type="submit", value="Query addMovie")
