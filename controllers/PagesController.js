@@ -1,7 +1,7 @@
 let Movie = require('../models/movies');
 
 const type = 'Movie';
-const title = 'Jandino: Whatever it Takes';
+const title = 'The Lord of the rings';
 const director = 'Fernando Lebrija';
 const cast = 'Jandino Asporaat';
 const country = 'United Kingdom';
@@ -63,49 +63,67 @@ exports.movieByGenre = async (req, res) => {
 
 exports.movieByDesc = async (req, res) => {
   const movieByDesc = await Movie.find({ 'description': description }).cache({ time: 10 });
+  console.log(typeof(movieByDesc));
   res.json(movieByDesc);
 };
 
 exports.moviesRRated = async (req, res) => {
-  const moviesRRated = await Movie.find({ 'rating': 'R' }).count().cache({ time: 10 });
-  res.json({moviesRRated});
+  const moviesRRated = await Movie.find({ 'rating': 'R' }).countDocuments().cache({ time: 10 });
+  const obj = {moviesRRated};
+  console.log(typeof(obj));
+  res.json(obj);
 };
 
 exports.tvShows = async (req, res) => {
-  const tvShows = await Movie.find({ 'type': 'TV Show' }).count().cache({ time: 10 });
+  const tvShows = await Movie.find({ 'type': 'TV Show' }).countDocuments().cache({ time: 10 });
   res.json(tvShows);
 };
 
 exports.moreThanOne = async (req, res) => {
-  const moreThanOne = await Movie.find({ 'director': { $regex: ',' } }).count().cache({ time: 10 });
+  const moreThanOne = await Movie.find({ 'director': { $regex: ',' } }).countDocuments().cache({ time: 10 });
   res.json(moreThanOne);
 };
 
 exports.releaseYear = async (req, res) => {
-  const releasedYear = await Movie.find({ 'release_year': '2012'}).count().cache({ time: 10 });
+  const releasedYear = await Movie.find({ 'release_year': '2012'}).countDocuments().cache({ time: 10 });
   res.json(releasedYear);
 };
 
-    /*app.post('test', async (req, res) => {
-      const { title, director, country } = req.body;
-  
-      if (!title || !director || !country) {
-        return res.status(400).send('Missing title, author, or content')
-      }
-  
-      const movie = new Movie({
-        title,
-        director,
-        country
-      });
-  
-      try {
-        await movie.save();
-        res.send(movie);
-      } catch (err) {
-        res.status(400).send(err.message);
-      }
-    });
-  };*/
+exports.addOne = async (req, res) => {
+  let type = "Movie" // req.body.type;
+  let title = "The Lord of the rings" //req.body.title;
+  let director = "Peter Jackson" //req.body.director;
+  let cast = "Orlando Bloo, Elijah Wood, Viggo Mortensen" //req.body.cast;
+  let country = "United Kingdom" //req.body.country;
+  let release_year = "2001" //req.body.releaseYear;
+  let rating = "PG-13" //req.body.rating;
+  let duration = "208" //req.body.duration;
+  let listed_in = "Adventure, Fantasy" //req.body.listed_in;
+  let description = "Frodo Baggings is a hobbit and has to destroy the ring" //req.body.description;
+  let newMovie = new Movie({
+    id: Math.floor(Math.random() * 100000000) + 85000000,
+    type: type,
+    title: title,
+    director: director,
+    cast: cast,
+    country: country,
+    date_added: new Date(),
+    release_year: release_year,
+    rating: rating,
+    duration: duration,
+    listed_in: listed_in,
+    description: description
+  });
+
+  try{
+    await newMovie.save();
+    console.log("Added " + newMovie.title);
+    res.send(newMovie);
+  } catch(err) {
+    res.status(400).send(err);
+  }
+
+}
+
 
 

@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
-app.use('/movies', webRoutes);
+app.use('/', webRoutes);
 
 // App init
 app.listen(appConfig.expressPort, () => {

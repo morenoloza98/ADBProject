@@ -19,5 +19,6 @@ router.get('/R-rated', pagesController.moviesRRated);
 router.get('/shows', pagesController.tvShows);
 router.get('/moreThanOne', pagesController.moreThanOne);
 router.get('/releasedYear', pagesController.releaseYear);
+router.post('/add-movie', pagesController.addOne);
 
 module.exports = router;
