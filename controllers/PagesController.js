@@ -33,7 +33,9 @@ exports.index = (req, res) => {
 }
 
 exports.movieByType = async (req, res) => {
-  const moviesByType = await Movie.find({ 'type': type }, { _id: 0 }).limit(10).cache({ time: 1440, key: 'type' });
+  // let type = req.body.type;
+  // console.log(req);
+  const moviesByType = await Movie.find({ 'type': type }, { _id: 0 }).limit(50).cache({ time: 1440, key: 'type' });
   res.json(moviesByType);
 };
 

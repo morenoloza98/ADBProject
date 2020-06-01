@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const redis = require("redis");
 const util = require("util");
 const keys = require("../configs/keys");
-const { type } = require("os");
 
 const client = redis.createClient({
   host: keys.redisHost,
@@ -38,22 +37,24 @@ mongoose.Query.prototype.exec = async function() {
   if (cacheValue) {
     const doc = JSON.parse(cacheValue);
     console.log("Response from Redis");
+    if(util.isNumber(doc.result)){
+      return doc;
+    }
     return Array.isArray(doc)
       ? doc.map(d => new this.model(d))
       : new this.model(doc);
   } else {
     var result = await exec.apply(this, arguments);
     if(util.isNumber(result)){
-      result = {result: result};
+      result = {result};
     }
     client.hset(this.hashKey, key, JSON.stringify(result));
     client.expire(this.hashKey, this.time);
     console.log("Response from MongoDB");
     return result;
   }
-
-
 };
+
 module.exports = {
   clearHash(hashKey) {
     client.del(JSON.stringify(hashKey));

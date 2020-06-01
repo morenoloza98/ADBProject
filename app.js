@@ -3,8 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const webRoutes = require('./routes/web');
 const keys = require('./configs/keys');
-//CAMBIOOOOOOS
-const bodyParser = require('body-parser');
 
 require('./models/movies');
 require('./utils/redis');
@@ -12,29 +10,30 @@ require('./utils/redis');
 
 // Express app creation
 const app = express();
-const port = process.env.PORT || 3000;
 
 // Configurations
 const appConfig = require('./configs/app');
 
-//Setup Pug 
-app.set('views', './views');
-app.set('view engine', 'pug');
 
-app.use(bodyParser.json());
+
+// app.use(bodyParser.json());
 
 // Mongoose
 mongoose.connect(keys.MONGO_URI, { 
-    useUnifiedTopology: true,
-    useNewUrlParser: true
+  useUnifiedTopology: true,
+  useNewUrlParser: true
 });
 
 // Receive parameters from the Form requests
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/', webRoutes);
+
+//Setup Pug 
+app.set('views', './views');
+app.set('view engine', 'pug');
 
 // App init
 app.listen(appConfig.expressPort, () => {

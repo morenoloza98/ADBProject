@@ -3,6 +3,9 @@ html
         title="Index del proyecto"
     body
         h1='Seleccione la query que desee probar'
+        //- form(action="/"+type, method="get")
+        //-     input(type="text" name="type" placeholder="Movie/TV Shows")
+        //-     input(type="submit", value="Query Type")
         a(href='/'+type, target="_blank", rel="noopener noreferrer") Query #{type}  <br />
         a(href='/'+title, target="_blank", rel="noopener noreferrer") Query #{title}  <br />
         a(href='/'+director, target="_blank", rel="noopener noreferrer") Query #{director}  <br />
