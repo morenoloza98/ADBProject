@@ -9,40 +9,30 @@ html
         form(action="/"+title, method="post")
             input(type="text" name="title" placeholder="Title")
             input(type="submit", value="Query Title", formtarget="_blank")
-        //- a(href='/'+type, target="_blank", rel="noopener noreferrer") Query #{type}  <br />
-        //- a(href='/'+title, target="_blank", rel="noopener noreferrer") Query #{title}  <br />
         form(action="/"+director, method="post")
             input(type="text" name="director" placeholder="Director")
             input(type="submit", value="Query Director", formtarget="_blank")
-        //-a(href='/'+director, target="_blank", rel="noopener noreferrer") Query #{director}  <br />
         form(action="/"+cast, method="post")
             input(type="text" name="cast" placeholder="Cast")
             input(type="submit", value="Query Cast", formtarget="_blank")
-        //-a(href='/'+cast, target="_blank", rel="noopener noreferrer") Query #{cast}  <br />
         form(action="/"+country, method="post")
             input(type="text" name="country" placeholder="Country")
             input(type="submit", value="Query Country", formtarget="_blank")
-        //-a(href='/'+country, target="_blank", rel="noopener noreferrer") Query #{country}  <br />
         form(action="/"+release_year, method="post")
             input(type="text" name="year" placeholder="Year")
             input(type="submit", value="Query Release year", formtarget="_blank")
-        //-a(href='/'+release_year, target="_blank", rel="noopener noreferrer") Query #{release_year}  <br />
         form(action="/"+rating, method="post")
             input(type="text" name="rating" placeholder="Rating")
             input(type="submit", value="Query Rating", formtarget="_blank")
-        //-a(href='/'+rating, target="_blank", rel="noopener noreferrer") Query #{rating}  <br />
         form(action="/"+duration, method="post")
             input(type="text" name="duration" placeholder="Duration")
             input(type="submit", value="Query Duration", formtarget="_blank")
-        //-a(href='/'+duration, target="_blank", rel="noopener noreferrer") Query #{duration}  <br />
         form(action="/"+listed_in, method="post")
             input(type="text" name="listed_in" placeholder="Listed in")
             input(type="submit", value="Query Listed in", formtarget="_blank")
-        //-a(href='/'+listed_in, target="_blank", rel="noopener noreferrer") Query #{listed_in}  <br />
         form(action="/"+description, method="post")
             input(type="text" name="description" placeholder="Description")
             input(type="submit", value="Query Description", formtarget="_blank")
-        //-a(href='/'+description, target="_blank", rel="noopener noreferrer") Query #{description}  <br />
         a(href='/'+ratedCount, target="_blank", rel="noopener noreferrer") Query #{ratedCount}  <br />
         a(href='/'+shows, target="_blank", rel="noopener noreferrer") Query #{shows}  <br />
         a(href='/'+moreThanOne, target="_blank", rel="noopener noreferrer") Query #{moreThanOne}  <br />

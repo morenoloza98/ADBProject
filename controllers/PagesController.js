@@ -1,17 +1,5 @@
 let Movie = require('../models/movies');
 
-// const type = 'Movie';
-// const title = 'The Lord of the rings';
-// const director = 'Fernando Lebrija';
-// const cast = 'Jandino Asporaat';
-// const country = 'United Kingdom';
-// const release_year = '2019';
-// const rating = 'TV-MA';
-// const duration = '90 min';
-// const listed_in = 'Comedies';
-// const description = 'A young journalist is forced into a life of crime to save his father and family in this series based on the novel by Miguel Sáez Carral.';
-
-
 exports.index = (req, res) => {
   res.render('index', {
     type:"type",
