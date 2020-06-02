@@ -82,13 +82,13 @@ exports.movieByDuration = async (req, res) => {
 
 exports.movieByGenre = async (req, res) => {
   let listed_in = req.body.listed_in
-  const movieByGenre = await Movie.find({ 'listed_in': listed_in }).cache({ time: 1440, key: 'genre' });
+  const movieByGenre = await Movie.find({ 'listed_in': {$regex: listed_in} }).cache({ time: 1440, key: 'genre' });
   res.json(movieByGenre);
 };
 
 exports.movieByDesc = async (req, res) => {
   let description = req.body.description;
-  const movieByDesc = await Movie.find({ 'description': description }).cache({ time: 1440, key: 'moviesByDesc' });
+  const movieByDesc = await Movie.find({ 'description': {$regex: description } }).cache({ time: 1440, key: 'moviesByDesc' });
   console.log(typeof(movieByDesc));
   res.json(movieByDesc);
 };
@@ -114,16 +114,16 @@ exports.releaseYear = async (req, res) => {
 };
 
 exports.addOne = async (req, res) => {
-  let type = "Movie" // req.body.type;
-  let title = "The Lord of the rings" //req.body.title;
-  let director = "Peter Jackson" //req.body.director;
-  let cast = "Orlando Bloo, Elijah Wood, Viggo Mortensen" //req.body.cast;
-  let country = "United Kingdom" //req.body.country;
-  let release_year = "2001" //req.body.releaseYear;
-  let rating = "PG-13" //req.body.rating;
-  let duration = "208" //req.body.duration;
-  let listed_in = "Adventure, Fantasy" //req.body.listed_in;
-  let description = "Frodo Baggings is a hobbit and has to destroy the ring" //req.body.description;
+  let type = req.body.type;
+  let title = req.body.title;
+  let director = req.body.director;
+  let cast = req.body.cast;
+  let country = req.body.country;
+  let release_year = req.body.year;
+  let rating = req.body.rating;
+  let duration = req.body.duration;
+  let listed_in = req.body.listed_in;
+  let description = req.body.description;
   let newMovie = new Movie({
     id: Math.floor(Math.random() * 100000000) + 85000000,
     type: type,
