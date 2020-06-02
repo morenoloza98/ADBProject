@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const webRoutes = require('./routes/web');
 const keys = require('./configs/keys');
+const bodyParser = require('body-parser');
 
 require('./models/movies');
 require('./utils/redis');
@@ -14,10 +15,6 @@ const app = express();
 // Configurations
 const appConfig = require('./configs/app');
 
-
-
-// app.use(bodyParser.json());
-
 // Mongoose
 mongoose.connect(keys.MONGO_URI, { 
   useUnifiedTopology: true,
@@ -25,15 +22,16 @@ mongoose.connect(keys.MONGO_URI, {
 });
 
 // Receive parameters from the Form requests
-app.use(express.json());
+app.use(express.json({ type: 'application/json' }));
 app.use(express.urlencoded({ extended: true }));
-
-// Routes
-app.use('/', webRoutes);
 
 //Setup Pug 
 app.set('views', './views');
 app.set('view engine', 'pug');
+
+// Routes
+app.use('/', webRoutes);
+
 
 // App init
 app.listen(appConfig.expressPort, () => {

@@ -1,15 +1,15 @@
 let Movie = require('../models/movies');
 
-const type = 'Movie';
-const title = 'The Lord of the rings';
-const director = 'Fernando Lebrija';
-const cast = 'Jandino Asporaat';
-const country = 'United Kingdom';
-const release_year = '2019';
-const rating = 'TV-MA';
-const duration = '90 min';
-const listed_in = 'Comedies';
-const description = 'A young journalist is forced into a life of crime to save his father and family in this series based on the novel by Miguel Sáez Carral.';
+// const type = 'Movie';
+// const title = 'The Lord of the rings';
+// const director = 'Fernando Lebrija';
+// const cast = 'Jandino Asporaat';
+// const country = 'United Kingdom';
+// const release_year = '2019';
+// const rating = 'TV-MA';
+// const duration = '90 min';
+// const listed_in = 'Comedies';
+// const description = 'A young journalist is forced into a life of crime to save his father and family in this series based on the novel by Miguel Sáez Carral.';
 
 
 exports.index = (req, res) => {
@@ -33,53 +33,61 @@ exports.index = (req, res) => {
 }
 
 exports.movieByType = async (req, res) => {
-  // let type = req.body.type;
-  // console.log(req);
+  let type = req.body.mot;
   const moviesByType = await Movie.find({ 'type': type }, { _id: 0 }).limit(50).cache({ time: 1440, key: 'type' });
   res.json(moviesByType);
 };
 
 exports.movieByTitle = async (req, res) => {
+  let title = req.body.title;
   const moviesByTitle = await Movie.find({ 'title': title }, { _id: 0 }).cache({ time: 1440, key: 'title' });
   res.json(moviesByTitle);
 };
 
 exports.movieByDirector = async (req, res) => {
+  let director = req.body.director;
   const moviesByDirector = await Movie.find({ 'director': director}).cache({ time: 1440, key: 'director' });
   res.json(moviesByDirector);
 };
 
 exports.movieByCast = async (req, res) => {
+  let cast = req.body.cast;
   const moviesByCast = await Movie.find({ 'cast': { $regex: cast } }).cache({ time: 1440, key: 'cast' });
   res.json(moviesByCast);
 };
 
 exports.movieByCountry = async (req, res) => {
+  let country = req.body.country;
   const movieByCountry = await Movie.find({ 'country': { $regex: country } }).cache({ time: 1440, key: 'country' });
   res.json(movieByCountry);
 };
 
 exports.movieByYear = async (req, res) => {
-  const movieByYear = await Movie.find({ 'release_year': release_year }).cache({ time: 1440, key: 'year' });
+  let year = req.body.year;
+  const movieByYear = await Movie.find({ 'release_year': year }).cache({ time: 1440, key: 'year' });
   res.json(movieByYear);
 };
 
 exports.movieByRating = async (req, res) => {
+  let rating = req.body.rating;
   const movieByRating = await Movie.find({ 'rating': rating }).cache({ time: 1440, rating: 'rating' });
   res.json(movieByRating);
 };
 
 exports.movieByDuration = async (req, res) => {
+  let duration = req.body.duration;
   const movieByDuration = await Movie.find({ 'duration': duration }).cache({ time: 1440, key: 'duration' });
   res.json(movieByDuration);
 };
 
 exports.movieByGenre = async (req, res) => {
+  let listed_in = req.body.listed_in
   const movieByGenre = await Movie.find({ 'listed_in': listed_in }).cache({ time: 1440, key: 'genre' });
   res.json(movieByGenre);
 };
 
 exports.movieByDesc = async (req, res) => {
+  let description = req.body.description;
   const movieByDesc = await Movie.find({ 'description': description }).cache({ time: 1440, key: 'moviesByDesc' });
   console.log(typeof(movieByDesc));
   res.json(movieByDesc);

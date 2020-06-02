@@ -3,11 +3,14 @@ html
         title="Index del proyecto"
     body
         h1='Seleccione la query que desee probar'
-        //- form(action="/"+type, method="get")
-        //-     input(type="text" name="type" placeholder="Movie/TV Shows")
-        //-     input(type="submit", value="Query Type")
-        a(href='/'+type, target="_blank", rel="noopener noreferrer") Query #{type}  <br />
-        a(href='/'+title, target="_blank", rel="noopener noreferrer") Query #{title}  <br />
+        form(action="/"+type, method="post")
+            input(type="text" name="mot" placeholder="Movie/TV Shows")
+            input(type="submit", value="Query Type", formtarget="_blank")
+        form(action="/"+title, method="get")
+            input(type="text" name="title" placeholder="Title")
+            input(type="submit", value="Query Title", formtarget="_blank")
+        //- a(href='/'+type, target="_blank", rel="noopener noreferrer") Query #{type}  <br />
+        //- a(href='/'+title, target="_blank", rel="noopener noreferrer") Query #{title}  <br />
         a(href='/'+director, target="_blank", rel="noopener noreferrer") Query #{director}  <br />
         a(href='/'+cast, target="_blank", rel="noopener noreferrer") Query #{cast}  <br />
         a(href='/'+country, target="_blank", rel="noopener noreferrer") Query #{country}  <br />
